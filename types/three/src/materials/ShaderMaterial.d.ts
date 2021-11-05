@@ -1,115 +1,119 @@
-import { IUniform } from '../renderers/shaders/UniformsLib';
-import { MaterialParameters, Material } from './Material';
-import { GLSLVersion } from '../constants';
+import { IUniform } from "../renderers/shaders/UniformsLib";
+import { MaterialParameters, Material } from "./Material";
+import { GLSLVersion } from "../constants";
 
-export interface ShaderMaterialParameters extends MaterialParameters {
-    uniforms?: { [uniform: string]: IUniform } | undefined;
-    vertexShader?: string | undefined;
-    fragmentShader?: string | undefined;
-    linewidth?: number | undefined;
-    wireframe?: boolean | undefined;
-    wireframeLinewidth?: number | undefined;
-    lights?: boolean | undefined;
-    clipping?: boolean | undefined;
+type RecursivePartial<T> = { [P in keyof T]?: T[P] extends Object ? RecursivePartial<T[P]> : T[P] | undefined; }
 
-    extensions?:
-        | {
-              derivatives?: boolean | undefined;
-              fragDepth?: boolean | undefined;
-              drawBuffers?: boolean | undefined;
-              shaderTextureLOD?: boolean | undefined;
-          }
-        | undefined;
-    glslVersion?: GLSLVersion | undefined;
+interface Parameters<
+  TUniforms extends { [uniform: string]: IUniform } = {}
+> {
+  uniforms: TUniforms;
+  vertexShader: string;
+  fragmentShader: string;
+  linewidth: number;
+  wireframe: boolean;
+  wireframeLinewidth: number;
+  lights: boolean;
+  clipping: boolean;
+
+  extensions: {
+    derivatives: boolean;
+    fragDepth: boolean;
+    drawBuffers: boolean;
+    shaderTextureLOD: boolean;
+  };
+  glslVersion: GLSLVersion;
 }
 
-export class ShaderMaterial extends Material {
-    constructor(parameters?: ShaderMaterialParameters);
+export type ShaderMaterialParameters = MaterialParameters & RecursivePartial<Parameters>;
 
-    /**
-     * @default 'ShaderMaterial'
-     */
-    type: string;
+export declare class ShaderMaterial extends Material implements Parameters {
+  constructor(parameters?: ShaderMaterialParameters);
 
-    /**
-     * @default {}
-     */
-    defines: { [key: string]: any };
+  /**
+   * @default 'ShaderMaterial'
+   */
+  type: string;
 
-    /**
-     * @default {}
-     */
-    uniforms: { [uniform: string]: IUniform };
-    vertexShader: string;
-    fragmentShader: string;
+  /**
+   * @default {}
+   */
+  defines: { [key: string]: any };
 
-    /**
-     * @default 1
-     */
-    linewidth: number;
+  /**
+   * @default {}
+   */
+  uniforms: TUniforms;
+  vertexShader: string;
+  fragmentShader: string;
 
-    /**
-     * @default false
-     */
-    wireframe: boolean;
+  /**
+   * @default 1
+   */
+  linewidth: number;
 
-    /**
-     * @default 1
-     */
-    wireframeLinewidth: number;
+  /**
+   * @default false
+   */
+  wireframe: boolean;
 
-    /**
-     * @default false
-     */
-    fog: boolean;
+  /**
+   * @default 1
+   */
+  wireframeLinewidth: number;
 
-    /**
-     * @default false
-     */
-    lights: boolean;
+  /**
+   * @default false
+   */
+  fog: boolean;
 
-    /**
-     * @default false
-     */
-    clipping: boolean;
+  /**
+   * @default false
+   */
+  lights: boolean;
 
-    /**
-     * @deprecated Use {@link ShaderMaterial#extensions.derivatives extensions.derivatives} instead.
-     */
-    derivatives: any;
+  /**
+   * @default false
+   */
+  clipping: boolean;
 
-    /**
-     * @default { derivatives: false, fragDepth: false, drawBuffers: false, shaderTextureLOD: false }
-     */
-    extensions: {
-        derivatives: boolean;
-        fragDepth: boolean;
-        drawBuffers: boolean;
-        shaderTextureLOD: boolean;
-    };
+  /**
+   * @deprecated Use {@link ShaderMaterial#extensions.derivatives extensions.derivatives} instead.
+   */
+  derivatives: any;
 
-    /**
-     * @default { 'color': [ 1, 1, 1 ], 'uv': [ 0, 0 ], 'uv2': [ 0, 0 ] }
-     */
-    defaultAttributeValues: any;
+  /**
+   * @default { derivatives: false, fragDepth: false, drawBuffers: false, shaderTextureLOD: false }
+   */
+  extensions: {
+    derivatives: boolean;
+    fragDepth: boolean;
+    drawBuffers: boolean;
+    shaderTextureLOD: boolean;
+  };
 
-    /**
-     * @default undefined
-     */
-    index0AttributeName: string | undefined;
+  /**
+   * @default { 'color': [ 1, 1, 1 ], 'uv': [ 0, 0 ], 'uv2': [ 0, 0 ] }
+   */
+  defaultAttributeValues: any;
 
-    /**
-     * @default false
-     */
-    uniformsNeedUpdate: boolean;
+  /**
+   * @default undefined
+   */
+  index0AttributeName: string | undefined;
 
-    /**
-     * @default null
-     */
-    glslVersion: GLSLVersion | null;
+  /**
+   * @default false
+   */
+  uniformsNeedUpdate: boolean;
 
-    isShaderMaterial: boolean;
+  /**
+   * @default null
+   */
+  glslVersion: GLSLVersion | null;
 
-    setValues(parameters: ShaderMaterialParameters): void;
-    toJSON(meta: any): any;
+  isShaderMaterial: boolean;
+
+  setValues(parameters: ShaderMaterialParameters): void;
+  toJSON(meta: any): any;
 }
