@@ -17,11 +17,11 @@ export class Pass {
     ): void;
 }
 
-export class FullScreenQuad {
-    constructor(material?: Material);
+export class FullScreenQuad<M extends Material> {
+    constructor(material?: M);
 
     render(renderer: WebGLRenderer): void;
     dispose(): void;
 
-    material: Material;
+    material: M;
 }

@@ -19,5 +19,5 @@ export class ShaderPass<T extends {} = TUniforms, Uniforms extends TUniforms = E
     textureID: string;
     uniforms: AvoidNullUniforms<Uniforms>;
     material: ShaderMaterial<Uniforms>;
-    fsQuad: FullScreenQuad;
+    fsQuad: FullScreenQuad<typeof this.material>;
 }

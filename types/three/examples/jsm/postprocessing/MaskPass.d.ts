@@ -1,10 +1,10 @@
-import { Scene, Camera } from '../../../src/Three';
+import { Object3D, Camera } from '../../../src/Three';
 
 import { Pass } from './Pass';
 
 export class MaskPass extends Pass {
-    constructor(scene: Scene, camera: Camera);
-    scene: Scene;
+    constructor(scene: Object3D, camera: Camera);
+    scene: Object3D;
     camera: Camera;
     inverse: boolean;
 }
