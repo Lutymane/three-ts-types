@@ -7,7 +7,7 @@ export class WebGLCapabilities {
     constructor(gl: WebGLRenderingContext, extensions: any, parameters: WebGLCapabilitiesParameters);
 
     readonly isWebGL2: boolean;
-    precision: string;
+    precision: 'lowp' | 'mediump' | 'highp';
     logarithmicDepthBuffer: boolean;
     maxTextures: number;
     maxVertexTextures: number;

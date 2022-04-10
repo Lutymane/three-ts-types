@@ -1,4 +1,6 @@
-export function cloneUniforms(uniforms_src: any): any;
+import { TUniforms } from 'three';
+
+export function cloneUniforms<U extends TUniforms>(uniforms_src: U): U;
 export function mergeUniforms(uniforms: any[]): any;
 
 export namespace UniformsUtils {

@@ -49,7 +49,7 @@ export class Texture extends EventDispatcher {
     /**
      * @default THREE.Texture.DEFAULT_IMAGE
      */
-    image: any; // HTMLImageElement or ImageData or { width: number, height: number } in some children;
+    image: HTMLImageElement | HTMLVideoElement | ImageData | { width: number; height: number }; // in some children;
 
     /**
      * @default []
