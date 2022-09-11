@@ -4,20 +4,21 @@ import { DepthTexture } from './../textures/DepthTexture';
 import { EventDispatcher } from './../core/EventDispatcher';
 import { Wrapping, TextureFilter, TextureDataType, TextureEncoding } from '../constants';
 
-export interface WebGLRenderTargetOptions {
-    wrapS?: Wrapping | undefined;
-    wrapT?: Wrapping | undefined;
-    magFilter?: TextureFilter | undefined;
-    minFilter?: TextureFilter | undefined;
-    format?: number | undefined; // RGBAFormat;
-    type?: TextureDataType | undefined; // UnsignedByteType;
-    anisotropy?: number | undefined; // 1;
-    depthBuffer?: boolean | undefined; // true;
-    stencilBuffer?: boolean | undefined; // false;
-    generateMipmaps?: boolean | undefined; // true;
-    depthTexture?: DepthTexture | undefined;
-    encoding?: TextureEncoding | undefined;
-}
+export type WebGLRenderTargetOptions = Partial<{
+    wrapS: Wrapping;
+    wrapT: Wrapping;
+    magFilter: TextureFilter;
+    minFilter: TextureFilter;
+    format: number; // RGBAFormat;
+    type: TextureDataType; // UnsignedByteType;
+    anisotropy: number; // 1;
+    depthBuffer: boolean; // true;
+    stencilBuffer: boolean; // false;
+    generateMipmaps: boolean; // true;
+    depthTexture: DepthTexture;
+    encoding: TextureEncoding;
+    samples: number;
+}>;
 
 export class WebGLRenderTarget extends EventDispatcher {
     constructor(width: number, height: number, options?: WebGLRenderTargetOptions);
@@ -26,6 +27,8 @@ export class WebGLRenderTarget extends EventDispatcher {
     width: number;
     height: number;
     depth: number;
+
+    samples: number;
 
     scissor: Vector4;
     /**

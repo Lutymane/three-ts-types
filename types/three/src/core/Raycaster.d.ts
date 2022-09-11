@@ -21,7 +21,8 @@ export interface Intersection<TIntersected extends Object3D = Object3D> {
     face?: Face | null | undefined;
     faceIndex?: number | undefined;
     object: TIntersected;
-    uv?: Vector2 | undefined;
+    // @todo fuck you, the fuck undefined???
+    uv: Vector2;
     instanceId?: number | undefined;
 }
 

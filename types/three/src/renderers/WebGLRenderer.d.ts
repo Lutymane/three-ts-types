@@ -207,7 +207,10 @@ export class WebGLRenderer implements Renderer {
 
     shadowMap: WebGLShadowMap;
 
-    pixelRatio: number;
+    // @todo it was removed apparently??/
+    // pixelRatio: number;
+
+    getPixelRatio(): number;
 
     capabilities: WebGLCapabilities;
     properties: WebGLProperties;

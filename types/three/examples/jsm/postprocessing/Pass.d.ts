@@ -12,12 +12,12 @@ export class Pass {
         renderer: WebGLRenderer,
         writeBuffer: WebGLRenderTarget,
         readBuffer: WebGLRenderTarget,
-        deltaTime: number,
-        maskActive: boolean,
+        deltaTime?: number,
+        maskActive?: boolean,
     ): void;
 }
 
-export class FullScreenQuad<M extends Material> {
+export class FullScreenQuad<M extends Material = Material> {
     constructor(material?: M);
 
     render(renderer: WebGLRenderer): void;

@@ -3,7 +3,7 @@ import { Color, MeshBasicMaterial, ShaderMaterial, Vector2, Vector3, WebGLRender
 import { Pass } from './Pass';
 
 export class UnrealBloomPass extends Pass {
-    constructor(resolution: Vector2, strength: number, radius: number, threshold: number);
+    constructor(resolution: Vector2 | undefined, strength: number | undefined, radius: number, threshold: number);
     resolution: Vector2;
     strength: number;
     radius: number;
