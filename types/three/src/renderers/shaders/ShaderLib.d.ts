@@ -4,6 +4,8 @@ export interface Shader {
     uniforms: { [uniform: string]: IUniform };
     vertexShader: string;
     fragmentShader: string;
+    precision: string;
+    isWebGL2: boolean;
 }
 
 export let ShaderLib: {
