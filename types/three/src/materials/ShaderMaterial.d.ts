@@ -18,6 +18,7 @@ export type AvoidNullUniforms<U extends TFullUniforms> = {
     [K in keyof U]: IUniform<U[K]['value'] extends null ? any : U[K]['value']>;
 };
 
+// @note extract TFullUniforms from TUniforms
 export type ExtractUniforms<U extends TUniforms> = AvoidNullUniforms<
     U extends TMaterialUniforms<infer U2> ? U2 : U extends TFullUniforms ? U : WrapUniforms<U>
 >;
@@ -68,9 +69,7 @@ export class ShaderMaterial<T extends TUniforms = any, U extends TFullUniforms =
      * @default {}
      */
     uniforms: U;
-    // uniforms: Exclude<keyof Uniforms, string> extends never
-    //     ? AvoidNullUniforms<Uniforms>
-    //     : Partial<AvoidNullUniforms<Uniforms>>;
+
     vertexShader: string;
     fragmentShader: string;
 

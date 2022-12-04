@@ -361,7 +361,7 @@ export class Object3D<E extends BaseEvent = Event> extends EventDispatcher<E> {
      * Searches through the object's children and returns the first with a matching name.
      * @param name	String to match to the children's Object3d.name property.
      */
-    getObjectByName(name: string): Object3D | undefined;
+    getObjectByName<O extends Object3D | undefined = Object3D | undefined>(name: string): O;
 
     getObjectByProperty(name: string, value: string): Object3D | undefined;
 
